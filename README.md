@@ -4,7 +4,7 @@ Projeto desenvolvido para o desafio da DIO de modelagem e transformação de dad
 
 ## Modelo estrela
 
-![Modelo estrela de vendas](docs/modelo_estrela.png)
+![Modelo estrela de vendas](modelo_estrela.png)
 
 O centro do modelo é `F_Vendas`, com uma linha por venda. As dimensões filtram a fato em relacionamentos `1:*` e direção única:
 
