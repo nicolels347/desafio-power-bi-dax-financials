@@ -29,7 +29,11 @@ O centro do modelo é `F_Vendas`, com uma linha por venda. As dimensões filtram
 
 ## DAX
 
-O modelo inclui medidas para vendas, lucro, descontos, COGS, unidades, quantidade de vendas, margem, ticket médio, vendas do ano anterior, crescimento anual e lucro acumulado no ano. As fórmulas estão em scripts/dax/D_Calendario.dax → D_Calendario.dax , e a tabela calendário está em [`scripts/dax/D_Calendario.dax`](scripts/dax/D_Calendario.dax).
+O modelo inclui medidas para vendas, lucro, descontos, COGS, unidades, quantidade de vendas, margem, ticket médio, vendas do ano anterior, crescimento anual e lucro acumulado no ano. As fórmulas estão em [`Medidas.dax`](Medidas.dax), e a tabela calendário está em [`D_Calendario.dax`](D_Calendario.dax).
+
+## Como abrir
+
+Abra `Projeto_Financials.pbip` no Power BI Desktop. O projeto é autocontido: os dados foram incorporados à consulta `Financials_Origem`, portanto não é necessário corrigir um caminho de arquivo para a primeira atualização. Para gerar o PBIX solicitado na entrega, siga [`como_gerar_pbix.md`](como_gerar_pbix.md).
 
 ## Como abrir
 
@@ -49,7 +53,7 @@ scripts/power_query/
 
 ## Validação
 
-A amostra contém 700 vendas, 6 produtos, 4 faixas de desconto e datas de setembro de 2013 a dezembro de 2014. Os totais esperados estão em docs/validacao_dados.md → validacao_dados.md.
+A amostra contém 700 vendas, 6 produtos, 4 faixas de desconto e datas de setembro de 2013 a dezembro de 2014. Os totais esperados estão em [`validacao_dados.md`](validacao_dados.md).
 
 ## Referências
 
