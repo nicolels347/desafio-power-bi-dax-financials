@@ -1,0 +1,68 @@
+/// Calendario continuo criado com DAX CALENDAR para analises temporais.
+table D_Calendario
+	dataCategory: Time
+
+	column Data
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		dataCategory: PaddedDateTableDates
+		summarizeBy: none
+		sourceColumn: [Date]
+
+	column Ano = YEAR([Data])
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column Trimestre_Numero = QUARTER([Data])
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column Trimestre = "T" & QUARTER([Data])
+		dataType: string
+		summarizeBy: none
+		sortByColumn: Trimestre_Numero
+
+	column Mes_Numero = MONTH([Data])
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column Mes = FORMAT([Data], "MMMM")
+		dataType: string
+		summarizeBy: none
+		sortByColumn: Mes_Numero
+
+	column Ano_Mes = FORMAT([Data], "YYYY-MM")
+		dataType: string
+		summarizeBy: none
+
+	column Dia = DAY([Data])
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column Dia_Semana_Numero = WEEKDAY([Data], 2)
+		dataType: int64
+		formatString: 0
+		summarizeBy: none
+
+	column Dia_Semana = FORMAT([Data], "dddd")
+		dataType: string
+		summarizeBy: none
+		sortByColumn: Dia_Semana_Numero
+
+	hierarchy Calendario
+		level Ano
+			column: Ano
+		level Trimestre
+			column: Trimestre
+		level Mes
+			column: Mes
+		level Dia
+			column: Dia
+
+	partition D_Calendario = calculated
+		mode: import
+		source = CALENDAR(MIN(F_Vendas[Data]), MAX(F_Vendas[Data]))

@@ -1,0 +1,29 @@
+Total Vendas = SUM(F_Vendas[Vendas])
+
+Total Lucro = SUM(F_Vendas[Lucro])
+
+Total Descontos = SUM(F_Vendas[Desconto])
+
+Total COGS = SUM(F_Vendas[COGS])
+
+Unidades Vendidas = SUM(F_Vendas[Unidades_Vendidas])
+
+Quantidade de Vendas = COUNTROWS(F_Vendas)
+
+Margem de Lucro = DIVIDE([Total Lucro], [Total Vendas])
+
+Ticket Medio = DIVIDE([Total Vendas], [Quantidade de Vendas])
+
+Vendas Ano Anterior =
+CALCULATE(
+    [Total Vendas],
+    SAMEPERIODLASTYEAR(D_Calendario[Data])
+)
+
+Crescimento Vendas YoY =
+DIVIDE(
+    [Total Vendas] - [Vendas Ano Anterior],
+    [Vendas Ano Anterior]
+)
+
+Lucro YTD = TOTALYTD([Total Lucro], D_Calendario[Data])

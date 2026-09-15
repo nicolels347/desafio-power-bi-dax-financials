@@ -1,0 +1,75 @@
+table D_Produtos_Detalhes
+
+	column ID_Produto_Detalhe
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: ID_Produto_Detalhe
+
+	column ID_Produto
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: ID_Produto
+
+	column Produto
+		dataType: string
+		summarizeBy: none
+		sourceColumn: Produto
+
+	column Preco_Fabricacao
+		dataType: int64
+		formatString: $#,##0
+		summarizeBy: none
+		sourceColumn: Preco_Fabricacao
+
+	column Preco_Venda
+		dataType: int64
+		formatString: $#,##0
+		summarizeBy: none
+		sourceColumn: Preco_Venda
+
+	column Media_Unidades_Vendidas
+		dataType: decimal
+		formatString: #,##0.00
+		summarizeBy: none
+		sourceColumn: Media_Unidades_Vendidas
+
+	partition D_Produtos_Detalhes = m
+		mode: import
+		source =
+			let
+			    // Define a granularidade produto, preço de fabricação e preço de venda.
+			    AgrupouDetalhesProduto = Table.Group(
+			        Financials_Origem,
+			        {"Product", "Manufacturing Price", "Sale Price"},
+			        {{"Media_Unidades_Vendidas", each List.Average([Units Sold]), Currency.Type}}
+			    ),
+			    OrdenouDetalhesProduto = Table.Sort(
+			        AgrupouDetalhesProduto,
+			        {{"Product", Order.Ascending}, {"Manufacturing Price", Order.Ascending}, {"Sale Price", Order.Ascending}}
+			    ),
+			    AdicionouIndiceDetalhe = Table.AddIndexColumn(OrdenouDetalhesProduto, "ID_Produto_Detalhe", 1, 1, Int64.Type),
+			    AdicionouIndiceProduto = Table.AddColumn(
+			        AdicionouIndiceDetalhe,
+			        "ID_Produto",
+			        each
+			            if [Product] = "Carretera" then 0
+			            else if [Product] = "Montana" then 1
+			            else if [Product] = "Paseo" then 2
+			            else if [Product] = "Velo" then 3
+			            else if [Product] = "VTT" then 4
+			            else if [Product] = "Amarilla" then 5
+			            else null,
+			        Int64.Type
+			    ),
+			    RenomeouDetalhes = Table.RenameColumns(
+			        AdicionouIndiceProduto,
+			        {{"Product", "Produto"}, {"Manufacturing Price", "Preco_Fabricacao"}, {"Sale Price", "Preco_Venda"}}
+			    ),
+			    ReordenouColunas = Table.ReorderColumns(
+			        RenomeouDetalhes,
+			        {"ID_Produto_Detalhe", "ID_Produto", "Produto", "Preco_Fabricacao", "Preco_Venda", "Media_Unidades_Vendidas"}
+			    )
+			in
+			    ReordenouColunas

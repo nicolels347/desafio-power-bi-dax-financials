@@ -1,0 +1,16 @@
+D_Calendario =
+CALENDAR(
+    MIN(F_Vendas[Data]),
+    MAX(F_Vendas[Data])
+)
+
+-- Colunas calculadas
+Ano = YEAR(D_Calendario[Data])
+Trimestre_Numero = QUARTER(D_Calendario[Data])
+Trimestre = "T" & FORMAT(D_Calendario[Data], "Q")
+Mes_Numero = MONTH(D_Calendario[Data])
+Mes = FORMAT(D_Calendario[Data], "MMMM")
+Ano_Mes = FORMAT(D_Calendario[Data], "YYYY-MM")
+Dia = DAY(D_Calendario[Data])
+Dia_Semana_Numero = WEEKDAY(D_Calendario[Data], 2)
+Dia_Semana = FORMAT(D_Calendario[Data], "dddd")

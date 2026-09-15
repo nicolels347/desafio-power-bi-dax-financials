@@ -1,0 +1,226 @@
+table F_Vendas
+
+	/// Soma das vendas liquidas no contexto de filtro.
+	measure 'Total Vendas' = SUM(F_Vendas[Vendas])
+		formatString: $#,##0.00
+		displayFolder: Indicadores Financeiros
+
+	/// Soma do lucro no contexto de filtro.
+	measure 'Total Lucro' = SUM(F_Vendas[Lucro])
+		formatString: $#,##0.00
+		displayFolder: Indicadores Financeiros
+
+	/// Soma dos descontos concedidos.
+	measure 'Total Descontos' = SUM(F_Vendas[Desconto])
+		formatString: $#,##0.00
+		displayFolder: Indicadores Financeiros
+
+	/// Soma do custo dos produtos vendidos.
+	measure 'Total COGS' = SUM(F_Vendas[COGS])
+		formatString: $#,##0.00
+		displayFolder: Indicadores Financeiros
+
+	/// Quantidade total de unidades vendidas.
+	measure 'Unidades Vendidas' = SUM(F_Vendas[Unidades_Vendidas])
+		formatString: #,##0.00
+		displayFolder: Volume
+
+	/// Quantidade de registros de venda.
+	measure 'Quantidade de Vendas' = COUNTROWS(F_Vendas)
+		formatString: #,##0
+		displayFolder: Volume
+
+	/// Lucro dividido pelas vendas liquidas.
+	measure 'Margem de Lucro' = DIVIDE([Total Lucro], [Total Vendas])
+		formatString: 0.00%
+		displayFolder: Indicadores Financeiros
+
+	/// Venda liquida media por registro.
+	measure 'Ticket Medio' = DIVIDE([Total Vendas], [Quantidade de Vendas])
+		formatString: $#,##0.00
+		displayFolder: Indicadores Financeiros
+
+	/// Vendas liquidas do mesmo periodo no ano anterior.
+	measure 'Vendas Ano Anterior' = CALCULATE([Total Vendas], SAMEPERIODLASTYEAR(D_Calendario[Data]))
+		formatString: $#,##0.00
+		displayFolder: Inteligencia de Tempo
+
+	/// Variacao percentual das vendas contra o mesmo periodo do ano anterior.
+	measure 'Crescimento Vendas YoY' = DIVIDE([Total Vendas] - [Vendas Ano Anterior], [Vendas Ano Anterior])
+		formatString: 0.00%
+		displayFolder: Inteligencia de Tempo
+
+	/// Lucro acumulado desde o inicio do ano.
+	measure 'Lucro YTD' = TOTALYTD([Total Lucro], D_Calendario[Data])
+		formatString: $#,##0.00
+		displayFolder: Inteligencia de Tempo
+
+	column SK_ID
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: SK_ID
+
+	column ID_Produto
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: ID_Produto
+
+	column ID_Desconto
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: ID_Desconto
+
+	column ID_Detalhe
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: ID_Detalhe
+
+	column ID_Produto_Detalhe
+		dataType: int64
+		isHidden
+		summarizeBy: none
+		sourceColumn: ID_Produto_Detalhe
+
+	column Produto
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Produto
+
+	column Unidades_Vendidas
+		dataType: decimal
+		isHidden
+		summarizeBy: sum
+		sourceColumn: Unidades_Vendidas
+
+	column Preco_Venda
+		dataType: int64
+		formatString: $#,##0
+		summarizeBy: none
+		sourceColumn: Preco_Venda
+
+	column Faixa_Desconto
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Faixa_Desconto
+
+	column Segmento
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Segmento
+
+	column Pais
+		dataType: string
+		isHidden
+		summarizeBy: none
+		sourceColumn: Pais
+
+	column Vendas_Brutas
+		dataType: decimal
+		isHidden
+		formatString: $#,##0.00
+		summarizeBy: sum
+		sourceColumn: Vendas_Brutas
+
+	column Desconto
+		dataType: decimal
+		isHidden
+		formatString: $#,##0.00
+		summarizeBy: sum
+		sourceColumn: Desconto
+
+	column Vendas
+		dataType: decimal
+		isHidden
+		formatString: $#,##0.00
+		summarizeBy: sum
+		sourceColumn: Vendas
+
+	column COGS
+		dataType: decimal
+		isHidden
+		formatString: $#,##0.00
+		summarizeBy: sum
+		sourceColumn: COGS
+
+	column Lucro
+		dataType: decimal
+		isHidden
+		formatString: $#,##0.00
+		summarizeBy: sum
+		sourceColumn: Lucro
+
+	column Data
+		dataType: dateTime
+		formatString: dd/MM/yyyy
+		summarizeBy: none
+		sourceColumn: Data
+
+	partition F_Vendas = m
+		mode: import
+		source =
+			let
+			    // Cria a fato de vendas e incorpora somente as chaves das dimensões e as métricas da transação.
+			    AdicionouChaveVenda = Table.AddIndexColumn(Financials_Origem, "SK_ID", 1, 1, Int64.Type),
+			    AdicionouIndiceProduto = Table.AddColumn(
+			        AdicionouChaveVenda,
+			        "ID_Produto",
+			        each
+			            if [Product] = "Carretera" then 0
+			            else if [Product] = "Montana" then 1
+			            else if [Product] = "Paseo" then 2
+			            else if [Product] = "Velo" then 3
+			            else if [Product] = "VTT" then 4
+			            else if [Product] = "Amarilla" then 5
+			            else null,
+			        Int64.Type
+			    ),
+			    AdicionouIndiceDesconto = Table.AddColumn(
+			        AdicionouIndiceProduto,
+			        "ID_Desconto",
+			        each if [Discount Band] = "None" then 0 else if [Discount Band] = "Low" then 1 else if [Discount Band] = "Medium" then 2 else if [Discount Band] = "High" then 3 else null,
+			        Int64.Type
+			    ),
+			    JuntouDetalhes = Table.NestedJoin(
+			        AdicionouIndiceDesconto,
+			        {"Segment", "Country"},
+			        D_Detalhes,
+			        {"Segmento", "Pais"},
+			        "DimDetalhes",
+			        JoinKind.LeftOuter
+			    ),
+			    ExpandiuDetalhes = Table.ExpandTableColumn(JuntouDetalhes, "DimDetalhes", {"ID_Detalhe"}, {"ID_Detalhe"}),
+			    JuntouDetalhesProduto = Table.NestedJoin(
+			        ExpandiuDetalhes,
+			        {"Product", "Manufacturing Price", "Sale Price"},
+			        D_Produtos_Detalhes,
+			        {"Produto", "Preco_Fabricacao", "Preco_Venda"},
+			        "DimProdutoDetalhes",
+			        JoinKind.LeftOuter
+			    ),
+			    ExpandiuDetalhesProduto = Table.ExpandTableColumn(JuntouDetalhesProduto, "DimProdutoDetalhes", {"ID_Produto_Detalhe"}, {"ID_Produto_Detalhe"}),
+			    SelecionouColunas = Table.SelectColumns(
+			        ExpandiuDetalhesProduto,
+			        {"SK_ID", "ID_Produto", "ID_Desconto", "ID_Detalhe", "ID_Produto_Detalhe", "Product", "Units Sold", "Sale Price", "Discount Band", "Segment", "Country", "Gross Sales", "Discounts", "Sales", "COGS", "Profit", "Date"}
+			    ),
+			    RenomeouColunas = Table.RenameColumns(
+			        SelecionouColunas,
+			        {
+			            {"Product", "Produto"}, {"Units Sold", "Unidades_Vendidas"}, {"Sale Price", "Preco_Venda"},
+			            {"Discount Band", "Faixa_Desconto"}, {"Segment", "Segmento"}, {"Country", "Pais"},
+			            {"Gross Sales", "Vendas_Brutas"}, {"Discounts", "Desconto"}, {"Sales", "Vendas"},
+			            {"Profit", "Lucro"}, {"Date", "Data"}
+			        }
+			    ),
+			    ReordenouColunas = Table.ReorderColumns(
+			        RenomeouColunas,
+			        {"SK_ID", "ID_Produto", "ID_Desconto", "ID_Detalhe", "ID_Produto_Detalhe", "Produto", "Unidades_Vendidas", "Preco_Venda", "Faixa_Desconto", "Segmento", "Pais", "Vendas_Brutas", "Desconto", "Vendas", "COGS", "Lucro", "Data"}
+			    )
+			in
+			    ReordenouColunas

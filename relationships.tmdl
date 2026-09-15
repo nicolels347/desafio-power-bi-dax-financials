@@ -1,0 +1,20 @@
+relationship 'Vendas Produto'
+	fromColumn: F_Vendas.ID_Produto
+	toColumn: D_Produtos.ID_Produto
+
+relationship 'Vendas Desconto'
+	fromColumn: F_Vendas.ID_Desconto
+	toColumn: D_Descontos.ID_Desconto
+
+relationship 'Vendas Detalhes'
+	fromColumn: F_Vendas.ID_Detalhe
+	toColumn: D_Detalhes.ID_Detalhe
+
+relationship 'Vendas Produto Detalhes'
+	fromColumn: F_Vendas.ID_Produto_Detalhe
+	toColumn: D_Produtos_Detalhes.ID_Produto_Detalhe
+
+relationship 'Vendas Calendario'
+	joinOnDateBehavior: datePartOnly
+	fromColumn: F_Vendas.Data
+	toColumn: D_Calendario.Data

@@ -1,0 +1,130 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2200" height="1400" viewBox="0 0 2200 1400">
+<rect width="100%" height="100%" fill="#F7F9FC"/>
+<text x="80" y="85" font-family="Arial" font-size="56" font-weight="700" fill="#172B4D">Modelo estrela de vendas</text>
+<text x="82" y="130" font-family="Arial" font-size="25" fill="#5E6C84">Financial Sample | granularidade da fato: uma linha por venda</text>
+<line x1="650" y1="340" x2="805" y2="430" stroke="#78909C" stroke-width="7"/>
+<line x1="620" y1="700" x2="805" y2="590" stroke="#78909C" stroke-width="7"/>
+<line x1="620" y1="1040" x2="805" y2="760" stroke="#78909C" stroke-width="7"/>
+<line x1="1410" y1="460" x2="1570" y2="350" stroke="#78909C" stroke-width="7"/>
+<line x1="1410" y1="820" x2="1530" y2="920" stroke="#78909C" stroke-width="7"/>
+<rect x="70" y="190" width="580" height="340" rx="18" fill="#FFFFFF" stroke="#D5DCE6" stroke-width="3"/>
+<path d="M 88 190 H 632 Q 650 190 650 208 V 252 H 70 V 208 Q 70 190 88 190" fill="#4257B2"/>
+<text x="92" y="230" font-family="Arial" font-size="28" font-weight="700" fill="#FFFFFF">D_Produtos</text>
+<circle cx="99" cy="287" r="5" fill="#0B6E8E"/>
+<text x="118" y="294" font-family="Arial" font-size="22" fill="#243B53">ID_Produto (PK)</text>
+<circle cx="99" cy="333" r="5" fill="#9AA5B1"/>
+<text x="118" y="340" font-family="Arial" font-size="22" fill="#243B53">Produto</text>
+<circle cx="99" cy="379" r="5" fill="#9AA5B1"/>
+<text x="118" y="386" font-family="Arial" font-size="22" fill="#243B53">Media_Unidades_Vendidas</text>
+<circle cx="99" cy="425" r="5" fill="#9AA5B1"/>
+<text x="118" y="432" font-family="Arial" font-size="22" fill="#243B53">Media_Valor_Vendas</text>
+<circle cx="99" cy="471" r="5" fill="#9AA5B1"/>
+<text x="118" y="478" font-family="Arial" font-size="22" fill="#243B53">Mediana_Valor_Vendas</text>
+<circle cx="99" cy="517" r="5" fill="#9AA5B1"/>
+<text x="118" y="524" font-family="Arial" font-size="22" fill="#243B53">Maior / Menor_Valor_Venda</text>
+<rect x="70" y="570" width="550" height="305" rx="18" fill="#FFFFFF" stroke="#D5DCE6" stroke-width="3"/>
+<path d="M 88 570 H 602 Q 620 570 620 588 V 632 H 70 V 588 Q 70 570 88 570" fill="#4257B2"/>
+<text x="92" y="610" font-family="Arial" font-size="28" font-weight="700" fill="#FFFFFF">D_Descontos</text>
+<circle cx="99" cy="667" r="5" fill="#0B6E8E"/>
+<text x="118" y="674" font-family="Arial" font-size="22" fill="#243B53">ID_Desconto (PK)</text>
+<circle cx="99" cy="713" r="5" fill="#9AA5B1"/>
+<text x="118" y="720" font-family="Arial" font-size="22" fill="#243B53">Faixa_Desconto</text>
+<circle cx="99" cy="759" r="5" fill="#9AA5B1"/>
+<text x="118" y="766" font-family="Arial" font-size="22" fill="#243B53">Desconto_Medio</text>
+<circle cx="99" cy="805" r="5" fill="#9AA5B1"/>
+<text x="118" y="812" font-family="Arial" font-size="22" fill="#243B53">Desconto_Minimo</text>
+<circle cx="99" cy="851" r="5" fill="#9AA5B1"/>
+<text x="118" y="858" font-family="Arial" font-size="22" fill="#243B53">Desconto_Maximo</text>
+<rect x="70" y="930" width="550" height="230" rx="18" fill="#FFFFFF" stroke="#D5DCE6" stroke-width="3"/>
+<path d="M 88 930 H 602 Q 620 930 620 948 V 992 H 70 V 948 Q 70 930 88 930" fill="#4257B2"/>
+<text x="92" y="970" font-family="Arial" font-size="28" font-weight="700" fill="#FFFFFF">D_Detalhes</text>
+<circle cx="99" cy="1027" r="5" fill="#0B6E8E"/>
+<text x="118" y="1034" font-family="Arial" font-size="22" fill="#243B53">ID_Detalhe (PK)</text>
+<circle cx="99" cy="1073" r="5" fill="#9AA5B1"/>
+<text x="118" y="1080" font-family="Arial" font-size="22" fill="#243B53">Segmento</text>
+<circle cx="99" cy="1119" r="5" fill="#9AA5B1"/>
+<text x="118" y="1126" font-family="Arial" font-size="22" fill="#243B53">Pais</text>
+<rect x="805" y="270" width="605" height="910" rx="18" fill="#FFFFFF" stroke="#D5DCE6" stroke-width="3"/>
+<path d="M 823 270 H 1392 Q 1410 270 1410 288 V 332 H 805 V 288 Q 805 270 823 270" fill="#0B6E8E"/>
+<text x="827" y="310" font-family="Arial" font-size="28" font-weight="700" fill="#FFFFFF">F_Vendas</text>
+<circle cx="834" cy="367" r="5" fill="#9AA5B1"/>
+<text x="853" y="374" font-family="Arial" font-size="22" fill="#243B53">SK_ID</text>
+<circle cx="834" cy="420" r="5" fill="#0B6E8E"/>
+<text x="853" y="427" font-family="Arial" font-size="22" fill="#243B53">ID_Produto (FK)</text>
+<circle cx="834" cy="473" r="5" fill="#0B6E8E"/>
+<text x="853" y="480" font-family="Arial" font-size="22" fill="#243B53">ID_Desconto (FK)</text>
+<circle cx="834" cy="526" r="5" fill="#0B6E8E"/>
+<text x="853" y="533" font-family="Arial" font-size="22" fill="#243B53">ID_Detalhe (FK)</text>
+<circle cx="834" cy="579" r="5" fill="#0B6E8E"/>
+<text x="853" y="586" font-family="Arial" font-size="22" fill="#243B53">ID_Produto_Detalhe (FK)</text>
+<circle cx="834" cy="632" r="5" fill="#0B6E8E"/>
+<text x="853" y="639" font-family="Arial" font-size="22" fill="#243B53">Data (FK)</text>
+<circle cx="834" cy="685" r="5" fill="#9AA5B1"/>
+<text x="853" y="692" font-family="Arial" font-size="22" fill="#243B53">Unidades_Vendidas</text>
+<circle cx="834" cy="738" r="5" fill="#9AA5B1"/>
+<text x="853" y="745" font-family="Arial" font-size="22" fill="#243B53">Preco_Venda</text>
+<circle cx="834" cy="791" r="5" fill="#9AA5B1"/>
+<text x="853" y="798" font-family="Arial" font-size="22" fill="#243B53">Vendas_Brutas</text>
+<circle cx="834" cy="844" r="5" fill="#9AA5B1"/>
+<text x="853" y="851" font-family="Arial" font-size="22" fill="#243B53">Desconto</text>
+<circle cx="834" cy="897" r="5" fill="#9AA5B1"/>
+<text x="853" y="904" font-family="Arial" font-size="22" fill="#243B53">Vendas</text>
+<circle cx="834" cy="950" r="5" fill="#9AA5B1"/>
+<text x="853" y="957" font-family="Arial" font-size="22" fill="#243B53">COGS</text>
+<circle cx="834" cy="1003" r="5" fill="#9AA5B1"/>
+<text x="853" y="1010" font-family="Arial" font-size="22" fill="#243B53">Lucro</text>
+<rect x="1570" y="180" width="560" height="410" rx="18" fill="#FFFFFF" stroke="#D5DCE6" stroke-width="3"/>
+<path d="M 1588 180 H 2112 Q 2130 180 2130 198 V 242 H 1570 V 198 Q 1570 180 1588 180" fill="#4257B2"/>
+<text x="1592" y="220" font-family="Arial" font-size="28" font-weight="700" fill="#FFFFFF">D_Calendario</text>
+<circle cx="1599" cy="277" r="5" fill="#0B6E8E"/>
+<text x="1618" y="284" font-family="Arial" font-size="22" fill="#243B53">Data (PK)</text>
+<circle cx="1599" cy="323" r="5" fill="#9AA5B1"/>
+<text x="1618" y="330" font-family="Arial" font-size="22" fill="#243B53">Ano</text>
+<circle cx="1599" cy="369" r="5" fill="#9AA5B1"/>
+<text x="1618" y="376" font-family="Arial" font-size="22" fill="#243B53">Trimestre</text>
+<circle cx="1599" cy="415" r="5" fill="#9AA5B1"/>
+<text x="1618" y="422" font-family="Arial" font-size="22" fill="#243B53">Mes</text>
+<circle cx="1599" cy="461" r="5" fill="#9AA5B1"/>
+<text x="1618" y="468" font-family="Arial" font-size="22" fill="#243B53">Ano_Mes</text>
+<circle cx="1599" cy="507" r="5" fill="#9AA5B1"/>
+<text x="1618" y="514" font-family="Arial" font-size="22" fill="#243B53">Dia</text>
+<circle cx="1599" cy="553" r="5" fill="#9AA5B1"/>
+<text x="1618" y="560" font-family="Arial" font-size="22" fill="#243B53">Dia_Semana</text>
+<rect x="1530" y="745" width="610" height="375" rx="18" fill="#FFFFFF" stroke="#D5DCE6" stroke-width="3"/>
+<path d="M 1548 745 H 2122 Q 2140 745 2140 763 V 807 H 1530 V 763 Q 1530 745 1548 745" fill="#4257B2"/>
+<text x="1552" y="785" font-family="Arial" font-size="28" font-weight="700" fill="#FFFFFF">D_Produtos_Detalhes</text>
+<circle cx="1559" cy="842" r="5" fill="#0B6E8E"/>
+<text x="1578" y="849" font-family="Arial" font-size="22" fill="#243B53">ID_Produto_Detalhe (PK)</text>
+<circle cx="1559" cy="888" r="5" fill="#9AA5B1"/>
+<text x="1578" y="895" font-family="Arial" font-size="22" fill="#243B53">ID_Produto</text>
+<circle cx="1559" cy="934" r="5" fill="#9AA5B1"/>
+<text x="1578" y="941" font-family="Arial" font-size="22" fill="#243B53">Produto</text>
+<circle cx="1559" cy="980" r="5" fill="#9AA5B1"/>
+<text x="1578" y="987" font-family="Arial" font-size="22" fill="#243B53">Preco_Fabricacao</text>
+<circle cx="1559" cy="1026" r="5" fill="#9AA5B1"/>
+<text x="1578" y="1033" font-family="Arial" font-size="22" fill="#243B53">Preco_Venda</text>
+<circle cx="1559" cy="1072" r="5" fill="#9AA5B1"/>
+<text x="1578" y="1079" font-family="Arial" font-size="22" fill="#243B53">Media_Unidades_Vendidas</text>
+<circle cx="635" cy="315" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="635" y="323" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">1</text>
+<circle cx="780" cy="405" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="780" y="413" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">*</text>
+<circle cx="605" cy="675" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="605" y="683" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">1</text>
+<circle cx="780" cy="565" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="780" y="573" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">*</text>
+<circle cx="605" cy="1015" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="605" y="1023" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">1</text>
+<circle cx="780" cy="735" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="780" y="743" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">*</text>
+<circle cx="1540" cy="325" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="1540" y="333" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">1</text>
+<circle cx="1428" cy="435" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="1428" y="443" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">*</text>
+<circle cx="1505" cy="895" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="1505" y="903" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">1</text>
+<circle cx="1428" cy="795" r="20" fill="#FFFFFF" stroke="#78909C" stroke-width="3"/>
+<text x="1428" y="803" text-anchor="middle" font-family="Arial" font-size="25" font-weight="700" fill="#455A64">*</text>
+<text x="80" y="1270" font-family="Arial" font-size="25" fill="#5E6C84">Consulta de staging: Financials_Origem (oculta no modelo)</text>
+<text x="80" y="1310" font-family="Arial" font-size="25" fill="#5E6C84">Relacionamentos 1:* com filtro em uma direcao, das dimensoes para F_Vendas.</text>
+</svg>
